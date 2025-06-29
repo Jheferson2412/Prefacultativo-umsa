@@ -1,130 +1,133 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Prefacultativo Informática - UMSA</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <meta charset="UTF-8">
+  <title>Preuniversitario UMSA - Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.2">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f0f0f0;
-    }
-    header {
-      background-color: #002855;
-      color: white;
-      padding: 10px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    header img {
-      height: 50px;
-    }
-    header h1 {
-      font-size: 18px;
-      margin: 0;
-    }
-    .login, .dashboard {
-      max-width: 500px;
-      margin: 50px auto;
-      background-color: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    .form-group {
-      margin-bottom: 15px;
-    }
-    .form-group label {
-      display: block;
-      margin-bottom: 5px;
-    }
-    .form-group input {
-      width: 100%;
-      padding: 8px;
-      box-sizing: border-box;
-    }
-    .btn {
-      background-color: #002855;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      cursor: pointer;
-    }
-    .btn:hover {
-      background-color: #004080;
-    }
-    .section {
-      margin-top: 20px;
-    }
-    .notas-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    .notas-table th, .notas-table td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      text-align: center;
-    }
-    .notas-table th {
-      background-color: #e0e0e0;
-    }
+    body { font-family: Arial; background: #f5f5f5; margin: 0; padding: 40px; }
+    .container { max-width: 900px; margin: 40px auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    input[type='text'], input[type='password'], input[type='file'] { width: 100%; padding: 6px; margin: 6px 0; font-size: 0.9em; }
+    button { width: 100%; padding: 10px; background: #007bff; color: white; border: none; border-radius: 5px; }
+    .hidden { display: none; }
+    .nav-btn { margin: 5px; padding: 10px 15px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    .tab-section { margin-top: 20px; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ccc; padding: 6px; text-align: left; font-size: 0.85em; vertical-align: top; }
+    td:nth-child(1) { width: 25%; }
+    td:nth-child(2) { width: 25%; }
+    td:nth-child(3) { width: 50%; }
+    .nota-final { color: red; font-weight: bold; }
   </style>
 </head>
 <body>
-  <header>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Escudo_UMSA.png" alt="Logo UMSA" />
-    <h1>Prefacultativo - Carrera de Informática</h1>
-  </header>
+<div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 40px; background: #004080; color: white;">
+  <div>
+    <div style="font-weight: bold;">Universidad Mayor de San Andres</div>
+    <div style="text-transform: uppercase;">UMSA</div>
+  </div>
+  <div style="font-size: 1.2em;">Preuniversitario Informática</div>
+</div>
 
-  <div class="login" id="login">
-    <h2>Iniciar sesión</h2>
-    <div class="form-group">
-      <label for="ci">Cuenta (CI):</label>
-      <input type="text" id="ci" />
-    </div>
-    <div class="form-group">
-      <label for="password">Contraseña:</label>
-      <input type="password" id="password" />
-    </div>
-    <button class="btn" onclick="login()">Ingresar</button>
+<div class="container" id="login-container">
+  <h2>Iniciar Sesión</h2>
+  <input type="text" id="ci" placeholder="Carnet de identidad">
+  <input type="password" id="password" placeholder="Contraseña">
+  <button onclick="login()">Entrar</button>
+</div>
+
+<div class="container hidden" id="main-container">
+  <h2>Bienvenido, Andres Jheferson</h2>
+  <button class="nav-btn" onclick="mostrarSeccion('datos')">Datos Personales</button>
+  <button class="nav-btn" onclick="mostrarSeccion('postulaciones')">Mis Postulaciones</button>
+
+  <div id="datos" class="tab-section hidden">
+    <h3>Datos Personales</h3>
+    <p>Nombre: Andres Jheferson Amoraga Soliz</p>
+    <p>CI: 9153527</p>
+    <p>Carrera: Informática</p>
+    <p>Facultad: Ciencias Puras y Naturales</p>
+    <p>Fecha de inscripción: 11/03/2025</p>
+    <p>Paralelo: F</p>
+    <label>Subir Foto:</label>
+    <input type="file" accept="image/*" onchange="guardarImagen(event, 'fotoPerfil')"><br><br>
+    <img id="fotoPerfil" src="" alt="Foto de perfil" style="width:80px; height:100px; object-fit: cover; border:1px solid #ccc;">
   </div>
 
-  <div class="dashboard" id="dashboard" style="display:none;">
-    <h2>Panel del Estudiante</h2>
-
-    <div class="section">
-      <h3>Boleta de Inscripción</h3>
-      <input type="file" id="boleta" />
-    </div>
-
-    <div class="section">
-      <h3>Notas</h3>
-      <table class="notas-table">
-        <tr><th>Materia</th><th>Parcial 1</th><th>Parcial 2</th><th>Parcial 3</th><th>Nota Final</th></tr>
-        <tr><td>Matemáticas (MAT-99)</td><td>5</td><td>6</td><td>5</td><td>16</td></tr>
-        <tr><td>Informática (INFO-99)</td><td>4</td><td>3</td><td>4</td><td>11</td></tr>
-        <tr><td>Computación (COM-99)</td><td>6</td><td>7</td><td>6</td><td>19</td></tr>
-        <tr><td colspan="4"><strong>Total</strong></td><td><strong>46</strong></td></tr>
-      </table>
-    </div>
+  <div id="postulaciones" class="tab-section hidden">
+    <h3>Mis Postulaciones</h3>
+    <table>
+      <tr><th>ID</th><th>Fecha</th><th>CPT</th><th>Facultad</th><th>Carrera</th><th>Paralelo</th><th>Acciones</th></tr>
+      <tr>
+        <td>225240</td><td>11/03/2025</td><td>888504</td><td>Ciencias Puras y Naturales</td><td>Informática</td><td>F</td>
+        <td>
+          <button onclick="mostrarSeccion('asignaturas')">Asignaturas</button>
+          <button onclick="mostrarSeccion('boleta')">Boleta</button>
+        </td>
+      </tr>
+    </table>
   </div>
 
-  <script>
-    function login() {
-      const ci = document.getElementById('ci').value;
-      const password = document.getElementById('password').value;
-      if (ci === '9153527' && password === 'Cosmodragokit_1') {
-        document.getElementById('login').style.display = 'none';
-        document.getElementById('dashboard').style.display = 'block';
-      } else {
-        alert('Cuenta o contraseña incorrecta');
-      }
-    }
-  </script>
+  <div id="asignaturas" class="tab-section hidden">
+    <h3>Asignaturas</h3>
+    <table>
+      <tr><th>Asignatura</th><th>Docente</th><th>Notas</th></tr>
+      <tr>
+        <td>Introducción a la Informática</td><td style='white-space: nowrap;'>M.SC. ENRIQUEZ RALDE EDGAR RUFO</td>
+        <td style='font-size: 0.78em;'>Prácticas: 15<br>1er Parcial: 16<br>2do Parcial: 17<br>Examen Final: 17<br><span class="nota-final" style="color:green;">65</span></td>
+      </tr>
+      <tr>
+        <td>Introducción a la Computación</td><td style='white-space: nowrap;'>PH.D. MAMANI CHAVEZ HENRY</td>
+        <td style='font-size: 0.78em;'>Prácticas: 13<br>1er Parcial: 14<br>2do Parcial: 12<br>Examen Final: 14<br><span class="nota-final" style="color:green;">53</span></td>
+      </tr>
+      <tr>
+        <td>Introducción a la Matemática</td><td style='white-space: nowrap;'>PH.D. VALERO KARI ELVIS RONALD</td>
+        <td style='font-size: 0.78em;'>Prácticas: 11<br>1er Parcial: 12<br>2do Parcial: 10<br>Examen Final: 15<br><span class="nota-final">48</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="boleta" class="tab-section hidden">
+    <h3>Boleta</h3>
+    <label>Subir imagen de boleta:</label>
+    <input type="file" accept="image/*" onchange="guardarImagen(event, 'imagenBoleta')"><br><br>
+    <img id="imagenBoleta" src="" alt="Imagen boleta" style="max-width:100%; border:1px solid #ccc;">
+  </div>
+</div>
+
+<script>
+function login() {
+  const ci = document.getElementById("ci").value;
+  const pass = document.getElementById("password").value;
+  if (ci === "9153527" && pass === "Cosmodragokit_1") {
+    document.getElementById("login-container").classList.add("hidden");
+    document.getElementById("main-container").classList.remove("hidden");
+  } else {
+    alert("Credenciales incorrectas");
+  }
+}
+
+function mostrarSeccion(id) {
+  document.querySelectorAll('.tab-section').forEach(s => s.classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
+}
+
+function guardarImagen(event, imgId) {
+  const reader = new FileReader();
+  reader.onload = function() {
+    localStorage.setItem(imgId, reader.result);
+    document.getElementById(imgId).src = reader.result;
+  }
+  reader.readAsDataURL(event.target.files[0]);
+}
+
+window.onload = function() {
+  ["fotoPerfil", "imagenBoleta"].forEach(id => {
+    const data = localStorage.getItem(id);
+    if (data) document.getElementById(id).src = data;
+  });
+}
+</script>
+
 </body>
 </html>
