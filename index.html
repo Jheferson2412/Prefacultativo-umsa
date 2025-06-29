@@ -18,7 +18,17 @@
     td:nth-child(2) { width: 25%; }
     td:nth-child(3) { width: 50%; }
     .nota-final { color: red; font-weight: bold; }
-  </style>
+  
+@media (max-width: 600px) {
+  body { padding: 10px; }
+  .container { padding: 15px; margin: 20px auto; }
+  .nav-btn { display: block; width: 100%; margin-bottom: 10px; }
+  table { display: block; overflow-x: auto; width: 100%; }
+  table thead, table tbody, table tr, table td, table th { display: table; width: 100%; }
+  td:nth-child(1), td:nth-child(2), td:nth-child(3) { width: auto !important; }
+}
+
+</style>
 </head>
 <body>
 <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 40px; background: #004080; color: white;">
